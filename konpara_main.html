@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konpara.xyz</title>
+    <style>
+        /* Make everything pixelated */
+        body, table, td, img, font, marquee, canvas, div {
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+        /* Text pixelation */
+        * {
+            -webkit-font-smoothing: none;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeSpeed;
+        }
+
+        /* Optional: use a retro pixel font if available */
+        font {
+            font-family: "Press Start 2P", "Comic Sans MS", monospace;
+        }
+
+        /* Scrolling text animation */
+        @keyframes scrollUp {
+            0% { transform: translateY(0%); }
+            100% { transform: translateY(-300%); }
+        }
+
+        .scroll-text {
+            position: absolute;
+            top: 100%;
+            width: 100%;
+            z-index: 1;
+            color: black;
+            font-family: 'Comic Sans MS';
+            font-size: 14px;
+            line-height: 1.4em;
+            animation: scrollUp 40s linear infinite;
+        }
+
+        /* Low-res canvas scaling */
+        #dotsCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            width: 320px;
+            height: 500px;
+        }
+
+    </style>
+</head>
+<body bgcolor="#000000" text="#FF0000" link="#FF5555" vlink="#AA0000">
+
+<!-- Title Banner -->
+<center>
+<font face="Times New Roman" size="7" color="#FF0000">Konpara.xyz</font><br>
+<marquee scrollamount="6">
+    <font color="#FF4444" face="Comic Sans MS" size="5"><blink>Salvation through faith in Angel-Eternal Evangelical Life</blink></font>
+</marquee>
+<br><br>
+</center>
+
+<!-- Main Layout Table -->
+<table width="100%" border="0" cellspacing="5" cellpadding="5">
+<tr>
+
+    <!-- Sidebar (Left) -->
+    <td width="30%" valign="top">
+        <font face="Comic Sans MS" color=Red size="5"><b>Categories</b></font><br><br>
+
+        <font color="Red" size="3" style="text-shadow: 1px 1px rgb(228, 14, 82);"><u>- New</u></font><br>
+        <font color="Red" size="3">- Top</font><br>
+        <font color="Red" size="3">- About Konpara</font><br><br>
+
+        <!-- Scrolling text box -->
+        <div style="position: relative; width: 320px; height: 500px; border: 1px solid rgb(255,0,0); background-color: rgb(255,0,0); overflow: hidden; padding: 5px;">
+            <!-- Canvas for moving dots -->
+            <canvas id="dotsCanvas" width="160" height="250"></canvas>
+
+            <!-- Scrolling text -->
+            <div class="scroll-text">
+                <i>
+                The light of Angel descends upon Humanity<br>
+                Cheese and Crackers!<br>
+                The smiles of sleepers, not remembering a Life :)<br>
+                Never returning from the Basement <br>
+                Too Strange to Dance, Fletch?<br>
+                Ascend from the Wombs, you Sweet & Dirty Cunt<br>
+                Howling like a loon for ME<br>
+                True faith stuck inside<br>
+                Heil Angel<br>
+                </i>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- Sidebar Ad -->
+        <a href="#">
+            <img src="trex.png" width="300" height="400" border="3" alt="Advertisement" style="margin-top: 50px;">
+        </a>
+        <br>
+        <font face="Comic Sans MS" color="#FF4444" size="2">Cosmic Dancer</font>
+    </td>
+
+    <!-- Main Content (Right) -->
+    <td width="70%" valign="top">
+        
+        <!-- NEW Section -->
+        <!-- Post 1 -->
+        <table width="95%" border="3" cellpadding="5" cellspacing="5" bgcolor="#220000" bordercolor="#FF0000">
+            <tr>
+                <td>
+                    <font face="Comic Sans MS" color="#FF2222" size="5"><b>Road Stains Feeding</b></font>
+                    <br><br>
+                    <table width="100%" border="3" cellpadding="5" cellspacing="5" bgcolor="#110000" bordercolor="#FF5555">
+                        <tr>
+                            <td>
+                                <img src="deer hit.png" width="180" height="140" border="3" alt="Fresh Meat" style="filter: blur(1px);"><br>
+                                <font face="Verdana" color="#FF6666" size="2">Date: 08/10/2012</font><br>
+                                <font face="Times New Roman" color="#AAAAAA" size="1">Location:</font>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <br>
+
+        <!-- Post 2 -->
+        <table width="95%" border="3" cellpadding="5" cellspacing="5" bgcolor="#220000" bordercolor="#FF0000">
+            <tr>
+                <td>
+                    <font face="Comic Sans MS" color="#FF2222" size="5"><b>Angel Testing #37</b></font>
+                    <br><br>
+                    <table width="100%" border="3" cellpadding="5" cellspacing="5" bgcolor="#110000" bordercolor="#FF5555">
+                        <tr>
+                            <td>
+                                <img src="bhb_img2.png" width="180" height="140" border="3" alt="Fresh Meat" style="filter: blur(0.5px);"><br>
+                                <font face="Verdana" color="#FF6666" size="2">Date: 30/09/2012</font><br>
+                                <font face="Times New Roman" color="#AAAAAA" size="1">Location: 24 Suttie Rd, Bellevue Hill</font>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <br>
+
+        <!-- Post 3 -->
+        <table width="95%" border="3" cellpadding="5" cellspacing="5" bgcolor="#220000" bordercolor="#FF0000">
+            <tr>
+                <td>
+                    <font face="Comic Sans MS" color="#FF2222" size="5"><b>Fac3 Crembles8</b></font>
+                    <br><br>
+                    <table width="100%" border="3" cellpadding="5" cellspacing="5" bgcolor="#110000" bordercolor="#FF5555">
+                        <tr>
+                            <td>
+                                <img src="vhs_pic.png" width="180" height="140" border="3" alt="Fresh Meat" style="filter: blur(2px);"><br>
+                                <font face="Verdana" color="#FF6666" size="2">Date: 28/09/2012</font><br>
+                                <font face="Times New Roman" color="#AAAAAA" size="1">Location: 30 Norton St</font>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <br>
+
+        <!-- Post 4 -->
+        <table width="95%" border="3" cellpadding="5" cellspacing="5" bgcolor="#220000" bordercolor="#FF0000">
+            <tr>
+                <td>
+                    <font face="Comic Sans MS" color="#FF2222" size="5"><b>Acid Baby</b></font>
+                    <br><br>
+                    <table width="100%" border="3" cellpadding="5" cellspacing="5" bgcolor="#110000" bordercolor="#FF5555">
+                        <tr>
+                            <td>
+                                <img src="i dont wanna know.png" width="180" height="140" border="3" alt="Fresh Meat" style="filter: blur(2px);"><br>
+                                <font face="Verdana" color="#FF6666" size="2">Date: 24/09/2012</font><br>
+                                <font face="Times New Roman" color="#AAAAAA" size="1">Location: 24-28 Broughton St</font>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <br>
+
+        <!-- Post 5 -->
+        <table width="95%" border="3" cellpadding="5" cellspacing="5" bgcolor="#220000" bordercolor="#FF0000">
+            <tr>
+                <td>
+                    <font face="Comic Sans MS" color="#FF2222" size="5"><b>放棄されたデータベース?</b></font>
+                    <br><br>
+                    <table width="100%" border="3" cellpadding="5" cellspacing="5" bgcolor="#110000" bordercolor="#FF5555">
+                        <tr>
+                            <td>
+                                <img src="computers.png" width="180" height="140" border="3" alt="Fresh Meat" style="filter: blur(2px);"><br>
+                                <font face="Verdana" color="#FF6666" size="2">Date: 17/09/2012</font><br>
+                                <font face="Times New Roman" color="#AAAAAA" size="1">Location: 3510-1 Kitaimaizumi, JP</font>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <br>
+
+        <!-- Pagination -->
+        <center>
+        <ul style="list-style-type: none; padding: 0; margin: 20px 0;">
+            <li style="display: inline; margin: 0 5px;"><a href="konpara_main.html" style="text-decoration: none; color: #FF0000;"><u>1</u></a></li>
+            <li style="display: inline; margin: 0 5px;"><a href="konpara_2nd page.html" style="text-decoration: none; color: #FF0000;">2</a></li>
+            <li style="display: inline; margin: 0 5px;"><a href="white_dot.html" style="text-decoration: none; color: #FF0000;">3</a></li>
+            <li style="display: inline; margin: 0 5px;"><a href="#" style="text-decoration: none; color: #FF0000;">4</a></li>
+            <li style="display: inline; margin: 0 5px;"><a href="#" style="text-decoration: none; color: #FF0000;">5</a></li>
+            <li style="display: inline; margin: 0 5px;">...</li>
+            <li style="display: inline; margin: 0 5px;"><a href="#" style="text-decoration: none; color: #FF0000; font-family: Comic Sans MS; font-weight: bold;">148</a></li>
+        </ul>
+        </center>
+
+    </td>
+</tr>
+</table>
+
+<center><font face="Comic Sans MS" color="#FF0000" size="1">© 1999–2025 Konpara.xyz. All Rights Reserved.</font></center>
+
+<script>
+const canvas = document.getElementById('dotsCanvas');
+const ctx = canvas.getContext('2d');
+ctx.imageSmoothingEnabled = false;
+
+const dots = [];
+const numDots = 50;
+
+// Initialize dots at random positions
+for (let i = 0; i < numDots; i++) {
+    dots.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: 1 + Math.random() * 2,
+        dx: (Math.random() - 0.5) * 0.2,
+        dy: (Math.random() - 0.5) * 0.2
+    });
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let dot of dots) {
+        dot.x += dot.dx;
+        dot.y += dot.dy;
+
+        if (dot.x < 0) dot.x = canvas.width;
+        if (dot.x > canvas.width) dot.x = 0;
+        if (dot.y < 0) dot.y = canvas.height;
+        if (dot.y > canvas.height) dot.y = 0;
+
+        ctx.beginPath();
+        ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'black';
+        ctx.fill();
+    }
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
+</body>
+</html>

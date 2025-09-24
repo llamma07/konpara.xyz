@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kairo Dot Simulation</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      overflow: hidden;
+      color: white;
+      font-family: sans-serif;
+    }
+    canvas {
+      display: block;
+    }
+    #controls {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 5px;
+    }
+    label {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div id="controls">
+    <div>
+      <label for="dotCount">Number of Dots:</label>
+      <input type="range" id="dotCount" min="1" max="200" value="30">
+      <span id="dotValue">30</span>
+    </div>
+    <div>
+      <label for="dotSpeed">Speed:</label>
+      <input type="range" id="dotSpeed" min="0.01" max="0.9" step="0.01" value="0.05">
+      <span id="speedValue">0.05</span>
+    </div>
+  </div>
+  <canvas id="canvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    ctx.imageSmoothingEnabled = false; // disables smoothing for pixelated effect
+
+    let speed = parseFloat(document.getElementById("dotSpeed").value);
+
+    class Dot {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.vx = (Math.random() - 0.5) * speed;
+        this.vy = (Math.random() - 0.5) * speed;
+        this.radius = 3 + Math.random() * 2;
+        this.alpha = 1;
+        this.dead = false;
+        this.hasCollided = false;
+      }
+
+      update(dots) {
+        if (this.dead) return;
+
+        if (this.hasCollided) {
+          this.alpha -= 0.005;
+          if (this.alpha <= 0) this.dead = true;
+          return;
+        }
+
+        this.vx += (Math.random() - 0.5) * 0.001;
+        this.vy += (Math.random() - 0.5) * 0.001;
+
+        this.x += this.vx;
+        this.y += this.vy;
+
+        let closestDot = this.getClosestDot(dots);
+        if (closestDot && !this.dead) {
+          let dx = closestDot.x - this.x;
+          let dy = closestDot.y - this.y;
+          let dist = Math.sqrt(dx*dx + dy*dy);
+
+          if (dist < this.radius + closestDot.radius && !this.hasCollided) {
+            let combinedRadius = this.radius + closestDot.radius;
+            this.radius = combinedRadius / 2;
+            closestDot.radius = this.radius;
+
+            this.vx = 0; this.vy = 0;
+            closestDot.vx = 0; closestDot.vy = 0;
+
+            this.hasCollided = true;
+            closestDot.hasCollided = true;
+
+            this.alpha -= 0.005;
+            closestDot.alpha -= 0.005;
+          } else if (dist > 100) {
+            let force = (dist - 100) / 1000;
+            this.vx += (dx / dist) * force * 0.1;
+            this.vy += (dy / dist) * force * 0.1;
+          }
+        }
+      }
+
+      getClosestDot(dots) {
+        let closestDot = null;
+        let closestDist = Infinity;
+        for (let other of dots) {
+          if (other === this || other.dead) continue;
+          let dx = other.x - this.x;
+          let dy = other.y - this.y;
+          let dist = Math.sqrt(dx*dx + dy*dy);
+          if (dist < closestDist) {
+            closestDist = dist;
+            closestDot = other;
+          }
+        }
+        return closestDot;
+      }
+
+      draw() {
+        if (this.dead) return;
+
+        // draw pixelated circle by using small offscreen canvas
+        const size = Math.ceil(this.radius * 2);
+        const offCanvas = document.createElement("canvas");
+        offCanvas.width = size;
+        offCanvas.height = size;
+        const offCtx = offCanvas.getContext("2d");
+        offCtx.imageSmoothingEnabled = false;
+
+        offCtx.fillStyle = `rgba(255,255,255,${this.alpha})`;
+        offCtx.beginPath();
+        offCtx.arc(size/2, size/2, this.radius, 0, Math.PI*2);
+        offCtx.fill();
+
+        ctx.drawImage(offCanvas, this.x - this.radius, this.y - this.radius);
+      }
+    }
+
+    let dots = [];
+    const dotCountInput = document.getElementById("dotCount");
+    const dotValue = document.getElementById("dotValue");
+    const dotSpeedInput = document.getElementById("dotSpeed");
+    const speedValue = document.getElementById("speedValue");
+
+    function adjustDots() {
+      const targetCount = parseInt(dotCountInput.value);
+      dotValue.textContent = targetCount;
+
+      while (dots.length < targetCount) {
+        dots.push(new Dot(Math.random() * canvas.width, Math.random() * canvas.height));
+      }
+      while (dots.length > targetCount) {
+        dots.pop();
+      }
+    }
+
+    function adjustSpeed() {
+      speed = parseFloat(dotSpeedInput.value);
+      speedValue.textContent = speed.toFixed(2);
+
+      dots.forEach(d => {
+        d.vx = (Math.random() - 0.5) * speed;
+        d.vy = (Math.random() - 0.5) * speed;
+      });
+    }
+
+    dotCountInput.addEventListener("input", adjustDots);
+    dotSpeedInput.addEventListener("input", adjustSpeed);
+
+    adjustDots();
+    adjustSpeed();
+
+    function animate() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      for (let d of dots) {
+        d.update(dots);
+        d.draw();
+      }
+
+      dots = dots.filter(d => !d.dead);
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      adjustDots();
+    });
+  </script>
+</body>
+</html>
