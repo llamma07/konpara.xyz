@@ -4331,7 +4331,12 @@ function loadConversation(name) {
       // Only underline the URL
       let content;
       if (line.text.startsWith('http')) {
-        content = `<a href="${line.text}" target="_self" class="chat-link">${line.text}</a>`;
+        if (line.text === 'http://konpara.xyz') {
+          // Redirect to your local HTML page instead
+          content = `<a href="konpara_1st page.html" target="_self" class="chat-link">${line.text}</a>`;
+        } else {
+          content = `<a href="${line.text}" target="_self" class="chat-link">${line.text}</a>`;
+        }
       } else {
         content = line.text;
       }
@@ -4389,6 +4394,6 @@ document.querySelectorAll('.buddy').forEach(buddy => {
     if (dot) dot.style.display = 'none';
   });
 });
-  </script>
+</script>
 </body>
 </html>

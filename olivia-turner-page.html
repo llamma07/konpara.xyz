@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konpara.xyz - Post</title>
+    <style>
+        body, table, td, img, font, marquee, canvas, div {
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+        * {
+            -webkit-font-smoothing: none;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeSpeed;
+        }
+        font {
+            font-family: "Press Start 2P", "Comic Sans MS", monospace;
+        }
+        body {
+            background-color: #000000;
+            color: #FF0000;
+            display: flex;
+        }
+        /* Sidebar */
+        .sidebar {
+            width: 320px;
+            padding: 10px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        .scroll-text {
+            position: absolute;
+            top: 100%;
+            width: 100%;
+            z-index: 1;
+            color: black;
+            font-family: 'Comic Sans MS';
+            font-size: 14px;
+            line-height: 1.4em;
+            animation: scrollUp 40s linear infinite;
+        }
+        @keyframes scrollUp {
+            0% { transform: translateY(0%); }
+            100% { transform: translateY(-300%); }
+        }
+        #dotsCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            width: 320px;
+            height: 500px;
+        }
+        /* Main content */
+        .content {
+            flex: 1;
+            padding: 10px;
+        }
+        
+        .post-container {
+            width: 80%;
+            margin: 20px auto;
+            border: 3px solid #FF0000;
+            background-color: #220000;
+            padding: 10px;
+        }
+        .post-meta {
+            background-color: #110000;
+            border: 2px solid #FF5555;
+            padding: 8px;
+            margin-top: 10px;
+        }
+        .comment-section {
+            margin-top: 30px;
+            background-color: #110000;
+            border: 2px solid #FF5555;
+            padding: 10px;
+        }
+        .comment {
+            border-left: 2px solid #FF0000;
+            margin: 8px 0;
+            padding: 5px 10px;
+            background-color: #220000;
+            font-family: "Comic Sans MS", cursive;
+            font-size: 14px;
+        }
+        .reply-button {
+            font-size: 10px;
+            cursor: pointer;
+            color: #FF5555;
+        }
+        .reply-box {
+            margin-top: 5px;
+        }
+        .nested {
+            margin-left: 30px;
+            border-color: #AA0000;
+        }
+        input[type="text"] {
+            width: 90%;
+            border: 2px solid #FF0000;
+            background-color: #000;
+            color: #FF5555;
+            padding: 3px;
+            font-family: "Comic Sans MS";
+            font-size: 12px;
+        }
+        button {
+            background-color: #220000;
+            border: 2px solid #FF0000;
+            color: #FF5555;
+            font-family: "Comic Sans MS";
+            padding: 2px 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #FF0000;
+            color: #000;
+        }
+        input[type="text"] {
+    width: 90%;
+    border: 2px solid #FF0000;
+    background-color: #000;
+    color: #FF5555;
+    padding: 3px;
+    font-family: "Comic Sans MS";
+    font-size: 12px;
+
+    outline: none; /* REMOVE the blue highlight */
+}
+.pm-btn {
+    background-color: #220000;
+    border: 2px solid #FF0000;
+    color: #FF5555;
+    font-family: "Comic Sans MS";
+    padding: 2px 6px;
+  
+}
+
+.pm-btn:hover {
+    cursor: pointer; /* ensures it shows the hand pointer */
+    background-color: #FF0000;
+    color: #000;
+    cursor: pointer; /* default pointer on hover */
+}
+
+
+    </style>
+</head>
+<body>
+
+<!-- Sidebar (Konpara style) -->
+<div class="sidebar">
+    <font face="Comic Sans MS" color=Red size="5"><b>Categories</b></font><br><br>
+    <font color="Red" size="3" style="text-shadow: 1px 1px rgb(228, 14, 82);"><u>- New</u></font><br>
+    <font color="Red" size="3">- Top</font><br>
+    <font color="Red" size="3">- About Konpara</font><br><br>
+
+    <!-- Scrolling text box -->
+    <div style="position: relative; width: 320px; height: 500px; border: 1px solid rgb(255,0,0); background-color: rgb(255,0,0); overflow: hidden; padding: 5px;">
+        <!-- Canvas for moving dots -->
+        <canvas id="dotsCanvas" width="160" height="250"></canvas>
+
+        <!-- Scrolling text -->
+        <div class="scroll-text">
+            <i>
+            The light of Angel descends upon Humanity<br>
+            Cheese and Crackers!<br>
+            The smiles of sleepers, not remembering a Life :)<br>
+            Never returning from the Basement <br>
+            Too Strange to Dance, Fletch?<br>
+            Ascend from the Wombs, you Sweet & Dirty Cunt<br>
+            Howling like a loon for ME<br>
+            True faith stuck inside<br>
+            Heil Angel<br>
+            </i>
+        </div>
+    </div>
+
+    <br>
+
+    <!-- Sidebar Ad -->
+    <a href="#">
+        <img src="chuck-e-cheese1.png" 
+     width="300" height="400" 
+     alt="Advertisement" 
+     style="margin-top: 50px; border: 3px solid #FF0000;">
+
+    </a>
+</div>
+
+<!-- Main content -->
+<div class="content">
+    <center>
+    <a href="konpara_1st page.html" style="text-decoration: none;"><font face="Times New Roman" size="7" color="#FF0000">Konpara.xyz</font><br></a>
+    <marquee scrollamount="6">
+        <font color="#FF4444" face="Comic Sans MS" size="5"><blink>Salvation through faith in Angel-Eternal Evangelical Life</blink></font>
+    </marquee>
+    </center>
+
+    <div class="post-container">
+        <font face="Comic Sans MS" color="#FF2222" size="6"><b>放棄されたデータベース?</b></font>
+        <div class="post-meta">
+            <img src="computers.png" width="300" height="220" border="3" style="filter: blur(2px);"><br><br>
+            <font face="Verdana" color="#FF6666" size="2">Date: 17/09/2012</font><br>
+            <font face="Times New Roman" color="#AAAAAA" size="2">Location: 3510-1 Kitaimaizumi, JP</font>
+        </div>
+
+        <div class="comment-section">
+            <font color="#FF2222" face="Comic Sans MS" size="4"><b>Comments</b></font><br><br>
+
+            <div id="comments"></div>
+
+            <div class="reply-box">
+                <input type="text" id="newComment" placeholder="Enter your comment...">
+                <button onclick="addComment()">Post</button>
+            </div>
+        </div>
+    </div>
+
+    <center><font face="Comic Sans MS" color="#FF0000" size="1">© 1999–2025 Konpara.xyz. All Rights Reserved.</font></center>
+</div>
+
+<script>
+let commentsContainer = document.getElementById("comments");
+let newCommentInput = document.getElementById("newComment");
+
+function createCommentElement(text, depth = 0, username = "Guest") {
+    let commentDiv = document.createElement("div");
+    commentDiv.className = "comment";
+    if (depth > 0) commentDiv.classList.add("nested");
+
+    let content = document.createElement("div");
+    content.innerHTML = `<b>${username}:</b> ${text}`;
+    commentDiv.appendChild(content);
+
+    // Only guests get reply button
+    if (username === "Guest") {
+        let replyBtn = document.createElement("span");
+        replyBtn.className = "reply-button";
+        replyBtn.innerText = "Reply";
+        replyBtn.onclick = () => showReplyBox(commentDiv, depth + 1);
+        commentDiv.appendChild(replyBtn);
+    }
+
+    return commentDiv;
+}
+
+function addComment() {
+    if (newCommentInput.value.trim() === "") return;
+    let comment = createCommentElement(newCommentInput.value);
+    commentsContainer.appendChild(comment);
+    newCommentInput.value = "";
+}
+
+// Allow Enter key to submit
+newCommentInput.addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        addComment();
+    }
+});
+
+function showReplyBox(parent, depth) {
+    let box = document.createElement("div");
+    box.className = "reply-box";
+    box.innerHTML = `
+        <input type="text" placeholder="Enter your reply...">
+        <button>Reply</button>
+    `;
+    parent.appendChild(box);
+
+    let input = box.querySelector("input");
+    let btn = box.querySelector("button");
+
+    btn.onclick = () => {
+        let text = input.value;
+        if (text.trim() === "") return;
+        let reply = createCommentElement(text, depth);
+        parent.appendChild(reply);
+        parent.removeChild(box);
+    };
+
+    // Enter key works for replies too
+    input.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            btn.click();
+        }
+    });
+}
+
+/* -------------------
+   SCRIPTED EVENTS
+-------------------- */
+
+// 1. Post "I know." as BaileyLaura (Cmd/Ctrl+F)
+function postBaileyFirst() {
+    let firstComment = commentsContainer.querySelector(".comment");
+    if (!firstComment) return;
+    let reply = createCommentElement("I know.", 1, "BaileyLaura");
+    commentsContainer.appendChild(reply);
+}
+
+// 2. Post "PM?..." as BaileyLaura (Cmd/Ctrl+G)
+function postBaileySecond() {
+    let reply = createCommentElement("PM?...", 2, "BaileyLaura");
+    commentsContainer.appendChild(reply);
+}
+
+// 3. Popup request (Cmd/Ctrl+H)
+function showPopup() {
+    if (document.querySelector(".popup-box")) return; // prevent duplicates
+
+    let popup = document.createElement("div");
+    popup.className = "popup-box";
+    popup.innerHTML = `
+        <div class="popup-header"><b>New Chat Invite</b></div>
+        <div class="popup-body">BaileyLaura wants to chat!</div>
+        <div class="popup-actions">
+            <button class="pm-btn">Accept PM</button>
+            <button class="pm-btn">Decline</button>
+        </div>
+    `;
+    document.body.appendChild(popup);
+
+    // Cursor change on hover
+    document.querySelectorAll(".pm-btn").forEach(btn => {
+        btn.addEventListener("mouseover", () => {
+            document.body.style.cursor = "pointer";
+        });
+        btn.addEventListener("mouseout", () => {
+            document.body.style.cursor = "default";
+        });
+    });
+}
+
+// Listen for key combos
+document.addEventListener("keydown", function(e) {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "f") {
+        e.preventDefault();
+        postBaileyFirst();
+    }
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "g") {
+        e.preventDefault();
+        postBaileySecond();
+    }
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "j") {
+        e.preventDefault();
+        showPopup();
+    }
+});
+
+/* -------------------
+   POPUP STYLES
+-------------------- */
+const style = document.createElement("style");
+style.innerHTML = `
+.popup-box {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 220px;
+    border: 3px solid #FF0000;
+    background-color: #220000;
+    color: #FF5555;
+    font-family: "Comic Sans MS";
+    font-size: 12px;
+    z-index: 9999;
+    box-shadow: 0px 0px 15px #000;
+}
+.popup-header {
+    background: #110000;
+    padding: 5px;
+    border-bottom: 2px solid #FF5555;
+    font-size: 13px;
+}
+.popup-body {
+    padding: 10px;
+    font-size: 12px;
+}
+.popup-actions {
+    padding: 5px;
+    text-align: center;
+}
+.popup-actions button {
+    margin: 3px;
+    background-color: #000;
+    border: 2px solid #FF0000;
+    color: #FF5555;
+    font-size: 11px;
+    cursor: default;
+}
+.popup-actions button:hover {
+    background-color: #FF0000;
+    color: #000;
+}
+`;
+document.head.appendChild(style);
+
+/* -------------------
+   Dots animation (unchanged)
+-------------------- */
+const canvas = document.getElementById('dotsCanvas');
+const ctx = canvas.getContext('2d');
+ctx.imageSmoothingEnabled = false;
+
+const dots = [];
+const numDots = 50;
+
+for (let i = 0; i < numDots; i++) {
+    dots.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: 1 + Math.random() * 2,
+        dx: (Math.random() - 0.5) * 0.2,
+        dy: (Math.random() - 0.5) * 0.2
+    });
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let dot of dots) {
+        dot.x += dot.dx;
+        dot.y += dot.dy;
+        if (dot.x < 0) dot.x = canvas.width;
+        if (dot.x > canvas.width) dot.x = 0;
+        if (dot.y < 0) dot.y = canvas.height;
+        if (dot.y > canvas.height) dot.y = 0;
+
+        ctx.beginPath();
+        ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'black';
+        ctx.fill();
+    }
+    requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+
+</body>
+</html>
