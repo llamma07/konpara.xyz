@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Enhanced Minimalist Maze</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+    canvas {
+      display: block;
+      background: black;
+      border: 2px solid turquoise;
+    }
+    .instructions {
+      position: absolute;
+      top: 10px;
+      color: turquoise;
+      text-align: center;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="instructions">Use WASD keys to navigate. Reach the green end point.</div>
+  <canvas id="gameCanvas" width="960" height="540"></canvas>
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const tileSize = 30;
+    const rows = Math.floor(canvas.height / tileSize);
+    const cols = Math.floor(canvas.width / tileSize);
+
+    // More complex maze with multiple paths and dead ends
+    // 0 = wall (black), 1 = path (turquoise)
+    const maze = [
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,0,1],
+      [0,0,0,0,0,1,0,1,0,0,0,0,1,0,1,0,0,1,0,1,0,0,0,0,1,0,1,0,0,1,0,1],
+      [0,1,1,1,0,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,0,1,1,1,1,0,1],
+      [0,1,0,1,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1],
+      [0,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,0,1],
+      [0,0,0,0,0,1,0,1,0,0,0,0,1,0,1,0,0,1,0,1,0,0,0,0,1,0,1,0,0,1,0,1],
+      [0,1,1,1,0,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,0,1,1,1,1,0,1],
+      [0,1,0,1,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1],
+      [0,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ];
+
+    const player = { x: 0, y: 0 };
+    const end = { x: maze[0].length - 1, y: maze.length - 1 };
+
+    function drawMaze() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw maze paths
+      for (let y = 0; y < maze.length; y++) {
+        for (let x = 0; x < maze[y].length; x++) {
+          if (maze[y][x] === 1) {
+            ctx.fillStyle = "turquoise";
+            ctx.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
+          }
+        }
+      }
+      
+      // Draw start tile
+      ctx.fillStyle = "blue";
+      ctx.fillRect(0, 0, tileSize, tileSize);
+      
+      // Draw end tile
+      ctx.fillStyle = "green";
+      ctx.fillRect(end.x * tileSize, end.y * tileSize, tileSize, tileSize);
+      
+      // Draw player
+      ctx.fillStyle = "red";
+      ctx.beginPath();
+      ctx.arc(
+        player.x * tileSize + tileSize / 2,
+        player.y * tileSize + tileSize / 2,
+        tileSize / 3,
+        0,
+        Math.PI * 2
+      );
+      ctx.fill();
+    }
+
+    function movePlayer(dx, dy) {
+      const newX = player.x + dx;
+      const newY = player.y + dy;
+      if (
+        newX >= 0 &&
+        newX < maze[0].length &&
+        newY >= 0 &&
+        newY < maze.length &&
+        maze[newY][newX] === 1
+      ) {
+        player.x = newX;
+        player.y = newY;
+      }
+      drawMaze();
+      if (player.x === end.x && player.y === end.y) {
+        setTimeout(() => alert("Congratulations! You reached the end!"), 50);
+      }
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "w" || e.key === "ArrowUp") movePlayer(0, -1);
+      if (e.key === "s" || e.key === "ArrowDown") movePlayer(0, 1);
+      if (e.key === "a" || e.key === "ArrowLeft") movePlayer(-1, 0);
+      if (e.key === "d" || e.key === "ArrowRight") movePlayer(1, 0);
+    });
+
+    drawMaze();
+  </script>
+</body>
+</html>
